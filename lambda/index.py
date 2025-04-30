@@ -53,7 +53,7 @@ def lambda_handler(event, context):
         }
 
         req = urllib.request.Request(
-            "https://88a3-35-221-7-164.ngrok-free.app/generate",
+            url="https://f4c4-35-221-7-164.ngrok-free.app/",
             data=json.dumps(payload).encode("utf-8"),
             headers={
                 "accept": "application/json", 
