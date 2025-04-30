@@ -14,11 +14,11 @@ def extract_region_from_arn(arn):
         return match.group(1)
     return "us-east-1"  # デフォルト値
 
-# グローバル変数としてクライアントを初期化（初期値）
-bedrock_client = None
+# # グローバル変数としてクライアントを初期化（初期値）
+# bedrock_client = None
 
 # モデルID
-MODEL_ID = os.environ.get("MODEL_ID", "us.amazon.nova-lite-v1:0")
+MODEL_ID = "https://88a3-35-221-7-164.ngrok-free.app/"
 
 def lambda_handler(event, context):
     try:
