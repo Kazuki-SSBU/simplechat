@@ -43,7 +43,7 @@ def lambda_handler(event, context):
             "content": message
         })
         
-        # HTTPリクエスト用のペイロード
+        # FastAPI用のペイロード
         payload = {
             "prompt": message,
             "maxTokens": 512,
@@ -62,12 +62,18 @@ def lambda_handler(event, context):
             method="POST"
         )
 
+        # FastAPIにPOSTリクエスト
         with urllib.request.urlopen(req) as resp:
             resp_body = json.loads(resp.read().decode("utf-8"))
+
+        print("FastAPI response:", json.dumps(resp_body))
+
+        if not resp_body.get("response"):
+            raise Exception("No response content from FastAPI")
         
         # アシスタントの応答を取得
-        # assistant_response = response_body['output']['message']['content'][0]['text']
-        assistant_response = resp_body.get("generated_text", "")
+        assistant_response = resp_body["response"]
+        # assistant_response = resp_body.get("generated_text", "")
         
         # アシスタントの応答を会話履歴に追加
         messages.append({
